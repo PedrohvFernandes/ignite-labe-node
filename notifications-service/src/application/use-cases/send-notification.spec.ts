@@ -1,4 +1,4 @@
-import { InMemoryNotificationRepository } from '../../../test/repositories/in-memory-notifications-repositorie';
+import { InMemoryNotificationRepository } from '@test/repositories/in-memory-notifications-repositorie';
 import { SendNotification } from './send-notification';
 
 // Bd em memoria direto no teste:

@@ -7,6 +7,7 @@ export interface NotificationProps {
   content: Content;
   category: string;
   readAt?: Date | null;
+  canceledAt?: Date | null;
   createdAt: Date;
 }
 
@@ -17,8 +18,11 @@ export class Notification {
   private props: NotificationProps;
 
   // Construtor da classe que recebe os atributos da classe na criação do objeto vindo dela igual no Java
-  constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
-    this._id = randomUUID();
+  constructor(
+    props: Replace<NotificationProps, { createdAt?: Date }>,
+    id?: string,
+  ) {
+    this._id = id ?? randomUUID();
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),
@@ -79,12 +83,27 @@ export class Notification {
     return this.props.readAt;
   }
 
-  public set readAt(readAt: Date | null | undefined) {
-    this.props.readAt = readAt;
+  // public set readAt(readAt: Date | null | undefined) {
+  //   this.props.readAt = readAt;
+  // }
+  public read() {
+    this.props.readAt = new Date();
+  }
+
+  public Unread() {
+    this.props.readAt = null;
   }
 
   public get createdAt(): Date {
     return this.props.createdAt;
+  }
+
+  public cancel() {
+    this.props.canceledAt = new Date();
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.props.canceledAt;
   }
 
   public get id(): string {
